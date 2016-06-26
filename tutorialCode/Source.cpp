@@ -1,31 +1,46 @@
 #include <iostream>
-#include <string>
+#include <cctype>
 #include <array>
-#include <math.h>
+#include <string>
+#include <fstream>
+#include <ostream>
+#include "Source.h"
 using namespace std;
 
-
+double calculate(double a, double b, double (*ps)(double, double));
+double add(double x, double y);
+double sub(double x, double y);
 
 int main(int args, char* argv[])
 {
+    double(*func[2])(double, double) = { add,sub };
 
-    double a = 100, b = a;
-    const double rate1 = 0.1;
-    const double rate2 = 0.05;
-
-    int year = 0;
-
-    while ( b <= a)
+    for (size_t i = 0; i < 2; i++)
     {
-        a += (100*rate1);
-        b *= (1 + rate2);
-        year++;
-    }
+        cout << (*func[i])(0.4, 10.4) << endl;
+  
 
-    cout << "a = " << a << endl
-        << "b = " << b << endl
-        << "at year " << year << endl;
+    }
 
     return 0;
 }
+
+double calculate(double a, double b, double (*ps)(double, double))
+{
+    return (*ps)(a, b);
+}
+
+double add(double x, double y)
+{
+    return x + y;
+}
+
+double sub(double x, double y)
+{
+    return x - y;
+}
+
+
+
+
 
